@@ -41,6 +41,7 @@ class OrderBook {
     }
 
     matchOrders(order) {
+        console.log()
         const matchingOrder = Object.assign(order);
         const symbol = order.symbol;
         const opposingTxnType = order.txnType === 'buy' ? 'sell' : 'buy';
@@ -86,7 +87,7 @@ class OrderBook {
             }
 
             const txn_time = new Date().toISOString();
-
+            console.log('**************************matchedOrders', matchedOrders);
             // Handle matched orders here (create trades)
             matchedOrders.forEach(({ buyer, seller, price, quantity }) => {
                 buyer.status = 'locked';
@@ -115,5 +116,4 @@ class OrderBook {
         return this.orders[symbol] || { buy: [], sell: [] };
     }
 }
-
 module.exports = { OrderBook, Order }

@@ -44,6 +44,6 @@ setInterval(function () {
 }, 1000)
 
 service.on('request', (rid, key, payload, handler) => {
-  console.log(payload) // hello
-  handler.reply(null, 'world')
+  console.log(payload)
+  handler.reply(null, 'recieved order')
 })

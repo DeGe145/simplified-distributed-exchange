@@ -26,13 +26,12 @@ class Client {
   }
 
   async createOrder(orderId, symbol, txnType, price, quantity, clientId) {
-   const order = new Order(orderId, symbol, txnType, price, quantity, clientId);
-   console.log('1', order)
-   await this.orderBook.addOrder(order);
-   return order;
+    const order = new Order(orderId, symbol, txnType, price, quantity, clientId);
+    await this.orderBook.addOrder(order);
+    return order;
   }
 
-  createOrderPayload(order){
+  createOrderPayload(order) {
     return {
       client: this.clientId,
       type: 'order',
@@ -52,20 +51,31 @@ class Client {
 }
 
 async function simulateClients() {
-  const client = new Client();
-  const orderId = crypto.randomUUID();
-  const symbol = 'ETH/USD';
-  const txnType = 'buy'; 
-  const price = 2150;
-  const quantity = 10;
-  const clientId = this.clientId;
+  let client = new Client();
+  let orderId = crypto.randomUUID();
+  let symbol = 'ETH/USD';
+  let txnType = 'buy';
+  let price = 2200;
+  let quantity = 10;
+  let clientId = this.clientId;
 
-  const order = await client.createOrder(orderId, symbol, txnType, price, quantity, clientId);
-  console.log('2', order)
-
-  const payload = client.createOrderPayload(order);
+  let order = await client.createOrder(orderId, symbol, txnType, price, quantity, clientId);
+  let payload = client.createOrderPayload(order);
   client.sendRequest(payload);
 
+  client = new Client();
+  orderId = crypto.randomUUID();
+  symbol = 'ETH/USD';
+  txnType = 'sell';
+  price = 2150;
+  quantity = 10;
+  clientId = this.clientId;
+
+  order = await client.createOrder(orderId, symbol, txnType, price, quantity, clientId);
+  payload = client.createOrderPayload(order);
+  client.sendRequest(payload);
+
+  console.log(client.orderBook.getOrderBook('ETH/USD'));
 }
 
 simulateClients().catch(console.error);
