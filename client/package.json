@@ -1,0 +1,22 @@
+{
+  "name": "sde-server",
+  "version": "1.0.0",
+  "description": "The BFX challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeGe145/simplified-distributed-exchange.git"
+  },
+  "author": "Vinay Sarangmath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeGe145/simplified-distributed-exchange/issues"
+  },
+  "dependencies": {
+    "grenache-nodejs-http": "^0.7.13",
+    "grenache-nodejs-link": "^1.0.0"
+  }
+}
